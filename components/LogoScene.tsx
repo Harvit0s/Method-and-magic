@@ -122,9 +122,10 @@ const HtmlContent = () => {
             contactRef.current.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none'
         }
 
-        // Footer (Visible at end)
+        // Footer (Visible at very end)
         if (footerRef.current) {
-            const range = scroll.range(0.7, 0.15)
+            // Fade in during the last 10% of scroll
+            const range = scroll.range(0.85, 0.15)
             footerRef.current.style.opacity = `${range}`
         }
     })
@@ -183,8 +184,8 @@ const HtmlContent = () => {
                 </div>
             </section>
 
-            {/* FOOTER - 0.7 * 600 = 420vh */}
-            <section className="absolute top-[420vh] w-full h-full flex items-center justify-center pb-12">
+            {/* FOOTER - Compact End */}
+            <section className="absolute top-[510vh] w-full h-[40vh] flex items-end justify-center pb-8">
                 <div ref={footerRef} className="text-center opacity-0">
                     <h3 className="text-xl font-bold tracking-[0.2em] text-white/80 mb-4">METHOD & MAGIC</h3>
                     <div className="flex gap-6 text-sm text-gray-400 uppercase tracking-wider justify-center">
@@ -211,7 +212,7 @@ const LogoScene = () => {
                 <Environment preset="city" /> {/* Key for Mercury reflection */}
 
                 <Suspense fallback={null}>
-                    <ScrollControls pages={6} damping={0.2}>
+                    <ScrollControls pages={5.5} damping={0.2}>
 
                         {/* 3D Content */}
                         <Scroll>
