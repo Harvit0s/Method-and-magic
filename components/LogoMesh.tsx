@@ -13,9 +13,22 @@ interface LogoMeshProps {
     offset?: [number, number]
 }
 
+// Define the custom material type to satisfy TypeScript
+type LogoMaterialType = THREE.ShaderMaterial & {
+    uTime: number
+    uMouse: THREE.Vector2
+    uMouseVel: THREE.Vector2
+    uLiquidLevel: number
+    uGridThreshold: number
+    uLiquidThreshold: number
+    uLiquidScale: THREE.Vector2
+    uLiquidOffset: THREE.Vector2
+}
+
 const LogoMesh = ({ scale = [1.53, 1.53], offset = [0.00, 0.08] }: LogoMeshProps) => {
-    const meshRef = useRef(null)
-    const materialRef = useRef(null)
+    const meshRef = useRef<THREE.Mesh>(null)
+    // Fix: Explicitly type the ref so TS knows it has custom uniforms
+    const materialRef = useRef<LogoMaterialType>(null)
     const [hovered, setHover] = useState(false)
     const { viewport } = useThree()
 
